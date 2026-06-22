@@ -10,8 +10,8 @@ impl Commands {
         match cmd {
             "cls" => { console.clear(); true }
             "help" => { console.write_string("Commands: cls, help, ver, about, reboot, shutdown, uptime, mem, cpu, dice, flip, gui, dir, cd, read, write, create, mkdir, del\n"); true }
-            "ver" => { console.write_string("CubeOS v0.7-dev\n"); true }
-            "about" => { console.write_string("CubeOS by @cubedev\n"); true }
+            "ver" => { console.write_string(MiOS\n"); true }
+            "about" => { console.write_string("MiOS\n"); true }
             "reboot" => { console.write_string("Rebooting...\n"); loop { unsafe { core::arch::asm!("cli; hlt"); } } }
             "shutdown" => { console.write_string("Shutting down...\n"); loop { unsafe { core::arch::asm!("hlt"); } } }
             "uptime" => { console.write_string("Uptime: 0 ticks\n"); true }
@@ -46,7 +46,7 @@ impl Commands {
             }
             "write" => {
                 if let Some(path) = args {
-                    let data = b"Hello from CubeOS!\n";
+                    let data = b"Hello from MiOS!\n";
                     if fs.write_file(ata, path, data) { console.write_string("Written\n"); }
                     else { console.write_string("Failed\n"); }
                 } else { console.write_string("Usage: write <file>\n"); }
