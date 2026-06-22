@@ -1,0 +1,8 @@
+// В начало файла добавь:
+use crate::ata::AtaDrive;
+
+// В impl Commands измени сигнатуру execute:
+pub fn execute(&mut self, cmd: &str, args: Option<&str>, vga: &mut VGA, fs: &mut FSManager, ata: &AtaDrive) -> bool {
+
+// И в lib.rs обнови вызов:
+SHELL.execute(&input, &mut VGA, &mut FS, &ATA)

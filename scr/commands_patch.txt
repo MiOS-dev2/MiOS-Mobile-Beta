@@ -1,0 +1,36 @@
+// В commands.rs замени секцию "ls" на:
+
+"ls" => {
+    if let Some(count) = fs.list_dir("/") {
+        for i in 0..count {
+            if let Some(entry) = fs.get_dir_entry(i) {
+                vga.write_string(entry.name_str());
+                if entry.is_dir {
+                    vga.write_string("/");
+                }
+                vga.write_string("  ");
+            }
+        }
+        vga.write_string("\n");
+    } else {
+        vga.write_string("Cannot read directory\n");
+    }
+    true
+}
+"cat" => {
+    if let Some(path) = args {
+        let mut buf = [0u8; 4096];
+        if let Some(size) = fs.read_file(path, &mut buf) {
+            // Выводим как текст
+            for i in 0..size {
+                vga.put_char(buf[i] as char);
+            }
+            vga.write_string("\n");
+        } else {
+            vga.write_string("File not found\n");
+        }
+    } else {
+        vga.write_string("Usage: cat <filename>\n");
+    }
+    true
+}
